@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #162d3b;
+}
+
+.navegador{
+    display: flex;
+    justify-content: center;
+}
+
+.navegador a{
+    text-decoration: none;
+    color: white;
+}
+
+.divsLinks{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    width: 15vw;
+}
+
+.divsLinks:hover{
+    color: #00acee;
+}
+
+.divsLinks:hover{
+    background-color: #206f98;
+}
+
+
+
+
+.sectionBuscador{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #00acee;
+    height: 10vh;
+    margin-bottom: 2em;
+
+}
+
+.sectionBuscador form{
+    width: 60vw;
+    text-align: center;
+}
+
+.sectionBuscador form input{
+    height: 5vh;
+    width: 25vw;
+}
+
+.sectionTweets{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.divImg{
+    background-color: red;
+    width: 7vw;
+    height: 7vh;
+    margin-right: 15px;
+    border-radius: 10%;
+}
+
+.divTweet{
+    display: flex;
+    padding: 10px;
+    width: 60vw;
+
+}
+
+.userTweet{
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.contenidoTweet p{
+    font-size: .9em;
+}
+
+@media (max-width: 375px){
+
+    .divsLinks{
+        width: 25vw;
+    }
+
+    .sectionTweets{
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .divTweet{
+        width: 100%;
+    }
+
+    .divImg{
+        width: 55vw;
+        height: 7vh;
+    }
+}
