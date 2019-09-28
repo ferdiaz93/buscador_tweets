@@ -1,0 +1,29 @@
+{
+  "name": "buscador_tweets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferdiaz93/buscador_tweets.git"
+  },
+  "author": "fer diaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ferdiaz93/buscador_tweets/issues"
+  },
+  "homepage": "https://github.com/ferdiaz93/buscador_tweets#readme",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
