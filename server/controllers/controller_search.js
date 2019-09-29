@@ -10,24 +10,24 @@ var client = new Twitter({
     access_token_secret: process.env.ACCES_TOKEN_SECRET
 });
 
-var params = { screen_name: 'nodejs' };
-
-// client.get('statuses/user_timeline', params, function (error, tweets, response) {
-//     if (!error) {
-//         console.log(tweets);
-//     }
-// });
-
 
 function pedirRaiz(req, res) {
     res.sendFile(path.join(__dirname, "../../public/html/index.html"))
-    // console.dir(Twitter)
 }
 
 function pedirBuscador(req, res) {
-    client.get('search/tweets', { q: 'liam gallagher' }, function (error, tweets, response) {
-        res.send(tweets.statuses);
-    });
+
+    if (req.query.q) {
+        let params = req.query
+        // client.get('search/tweets', { q: 'liam gallagher' }, function (error, tweets, response) {
+        client.get('search/tweets', params, function (error, tweets, response) {
+            res.send(tweets.statuses);
+        });
+
+    } else {
+        console.log("no hay parametros")
+        res.send("no hay parametros")
+    }
 }
 
 function pedirHistorial(req, res) {
