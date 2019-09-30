@@ -1,25 +1,23 @@
 require("dotenv").config();
 const path = require("path");
-
-
-let Twitter = require("twitter");
-var client = new Twitter({
-    consumer_key: process.env.CONSUMER_KEY,
-    consumer_secret: process.env.CONSUMER_SECRET,
-    access_token_key: process.env.ACCESS_TOKEN_KEY,
-    access_token_secret: process.env.ACCES_TOKEN_SECRET
-});
+const client = require("./conexion-twitter");
 
 
 function pedirRaiz(req, res) {
+    console.log("se hizo un pedido a mi raiz/buscador")
     res.sendFile(path.join(__dirname, "../../public/html/index.html"))
 }
 
+/**
+ * 
+ * @param {obj} req 
+ * @param {function} res
+ * 
+ * Funcion que pide los tweets relacionados a las palabras que se le pasa por parametro a client.get() 
+ */
 function pedirBuscador(req, res) {
-
     if (req.query.q) {
         let params = req.query
-        // client.get('search/tweets', { q: 'liam gallagher' }, function (error, tweets, response) {
         client.get('search/tweets', params, function (error, tweets, response) {
             res.send(tweets.statuses);
         });
@@ -30,14 +28,11 @@ function pedirBuscador(req, res) {
     }
 }
 
-function pedirHistorial(req, res) {
-    res.send("se pidio pagina historial")
-}
 
 
 
 module.exports = {
     pedirRaiz: pedirRaiz,
     pedirBuscador: pedirBuscador,
-    pedirHistorial: pedirHistorial
+
 }

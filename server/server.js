@@ -1,5 +1,7 @@
 const express = require("express");
 const controladorBuscador = require("./controllers/controller_search")
+const controladorHistorial = require("./controllers/controller_historial")
+
 const app = express();
 const path = require("path")
 let port = 8080;
@@ -10,7 +12,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 //ruteo
 app.get("/", controladorBuscador.pedirRaiz);
 app.get("/buscador", controladorBuscador.pedirBuscador);
-app.get("/historial", controladorBuscador.pedirHistorial);
+app.get("/historial", controladorHistorial.obtenerHistorial);
+app.post("/historial", controladorHistorial.postearHistorial);
 
 
 
