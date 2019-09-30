@@ -1,7 +1,11 @@
 const btnBuscar = document.getElementById("buscador");
 const sectionTweets = document.getElementById("sectionTweets");
 const formulario = document.getElementById("formBuscador");
+const btnHistorial = document.getElementById("historial");
+const sectionHistorial = document.getElementById("sectionDeHistorial");
 
+//Se agrega evento al SUBMIT del form
+// este se encarga de pedir los tweets y al mismo tiempo hacer un POST de la busqueda realizada
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
     const textoBuscar = document.getElementById("inputTextoBuscar");
@@ -22,9 +26,26 @@ formulario.addEventListener("submit", (e) => {
         enviarDatos(jsonPOST)
 
     }
+});
+
+//Se le agrega evento al boton HISTORIAL para mostrar la lista de las busquedas realizadas
+btnHistorial.addEventListener("click", (e) =>{
+    e.preventDefault();
+    const mainTweets = document.getElementById("mainTweets");
+    const mainHistorial = document.getElementById("mainHistorial");
+
+    mainTweets.style.display = "none";
+    mainHistorial.style.display = "block";
+
+    pedirHistorial(armarHistoriales)
 })
 
-
+/**
+ * 
+ * @param {array} datos es un array de objetos
+ * Borra el contenido de la seccion de tweets
+ * recorre el array y por cada elemento ejecuta la funcion armarUnTweet 
+ */
 function armarTweets(datos) {
     sectionTweets.innerText = " "
     for (let i = 0; i < datos.length; i++) {
@@ -32,8 +53,38 @@ function armarTweets(datos) {
     }
 }
 
-function armarUnTweet(dato) {
+/**
+ * 
+ * @param {array} datos array de objetos
+ * borra el contenido de la seccion del historial
+ * por cada elemento del array ejecuta la funcion armarUnHistorial
+ */
+function armarHistoriales(datos){
+    sectionHistorial.innerText= "";
+    for(let i = 0; i < datos.length; i++){
+        armarUnHistorial(datos[i]);
+    }
+}
 
+/**
+ * 
+ * @param {obj} dato objeto traido de la DB
+ * arma un h3 con el dato guardado en la DB
+ */
+function armarUnHistorial(dato){
+    let h3Titulo = document.createElement("h3");
+    h3Titulo.setAttribute("class", "titulosHistorial");
+    h3Titulo.innerText= dato.titulo;
+
+    sectionHistorial.appendChild(h3Titulo);
+}
+
+/**
+ * 
+ * @param {obj} dato toda la informacion del tweet
+ * arma todos los elementos html con los datos del tweet
+ */
+function armarUnTweet(dato) {
     //div contenedor de todo el tweet
     let divContenedor = document.createElement("div");
     divContenedor.setAttribute("class", "divTweet");
@@ -48,7 +99,6 @@ function armarUnTweet(dato) {
     img.setAttribute("src", dato.user.profile_image_url_https);
 
     divImg.appendChild(img);
-
 
     //div contenido del tweet
     let divTextoTweet = document.createElement("div");

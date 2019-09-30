@@ -6,7 +6,6 @@ function obtenerHistorial(req, res) {
 
     conDB.query(pedidoSql, (err, result, fields) => {
         if (err) res.send(err);
-        console.log("ESTE ES MI RESULTADO", result);
         res.send(result)
     });
 }
