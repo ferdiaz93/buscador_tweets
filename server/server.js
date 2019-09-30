@@ -1,9 +1,13 @@
 const express = require("express");
+const bodyParser = require('body-parser');
+const path = require("path")
+
 const controladorBuscador = require("./controllers/controller_search")
 const controladorHistorial = require("./controllers/controller_historial")
 
 const app = express();
-const path = require("path")
+app.use(bodyParser.json());
+
 let port = 8080;
 
 //seleccionamos la carpeta que va a usar contenido estatico

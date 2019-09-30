@@ -1,26 +1,31 @@
 const conDB = require("../db/conexionbd");
 
 function obtenerHistorial(req, res) {
-    // let pedidoSql = "SELECT * FROM tweets";
+    console.log("se hizo un pedido al historial")
+    let pedidoSql = "SELECT * FROM tweets";
 
-    // conDB.query(pedidoSql, (error, result) => {
-    //     if (error) res.send(error);
-
-    //     const response = {
-    //         busqueda: result,
-    //     };
-
-    //     res.send(response);
-    // });
-    console.log("se hizo un pedido al historial", req)
+    conDB.query(pedidoSql, (err, result, fields) => {
+        if (err) res.send(err);
+        console.log("ESTE ES MI RESULTADO", result);
+        res.send(result)
+    });
 }
 
 
-//NO ME LLEGA NADA AL REQ.BODY
 function postearHistorial(req, res) {
-    console.log(req.body)
-    console.log("funcion postearHistorial ENVIADO");
-    res.send("enviado")
+    if (req.body) {
+        let valorAGuardar = req.body.textoBusqueda;
+        let consultaMysql = `insert into tweets(titulo) VALUES ("${valorAGuardar}")`;
+
+        conDB.query(consultaMysql, (err, result) => {
+            if (err) throw err;
+            res.send("Se guardo correctamente");
+        });
+
+    } else {
+        res.send("Hubo un error al recibir los datos")
+        console.log("no se recibieron datos");
+    }
 }
 
 
