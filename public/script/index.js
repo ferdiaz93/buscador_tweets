@@ -1,28 +1,27 @@
 const btnBuscar = document.getElementById("buscador");
-const textoBuscar = document.getElementById("inputTextoBuscar");
 const sectionTweets = document.getElementById("sectionTweets");
 const formulario = document.getElementById("formBuscador");
 
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
-    let data = new FormData(formulario);
-    
-    if (data.get("busqueda") === " " || data.get("busqueda") === null || data.get("busqueda") === undefined) {
+    const textoBuscar = document.getElementById("inputTextoBuscar");
+
+    if (textoBuscar.value.length === 0 || textoBuscar.value === null || textoBuscar.value === undefined) {
         console.log("no se pasaron data")
     } else {
-        let inputEndpoint = data.get("busqueda");
+        let inputEndpoint = textoBuscar.value;
         console.log(inputEndpoint);
+        //se piden los tweets pasandole los parametros correspondientes
         pedirTweets(inputEndpoint, armarTweets)
-        
-        let tweet = {
-            contenido: data.get("busqueda")
+
+        let objPOST = {
+            textoBusqueda: textoBuscar.value
         }
-        
-        console.dir(tweet);
-        enviarDatos(tweet);
+        let jsonPOST = JSON.stringify(objPOST)
+        //se mandan el valor del input search al backend para guardar en la DB
+        enviarDatos(jsonPOST)
+
     }
-
-
 })
 
 
@@ -110,5 +109,5 @@ function armarUnTweet(dato) {
     //agregamos el div contenedor al section de nuestro DOM
     sectionTweets.appendChild(divContenedor);
 
-  //  console.log(dato);
+    //  console.log(dato);
 }
