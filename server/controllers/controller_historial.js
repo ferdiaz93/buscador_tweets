@@ -1,7 +1,6 @@
 const conDB = require("../db/conexionbd");
 
 function obtenerHistorial(req, res) {
-    console.log("se hizo un pedido al historial")
     let pedidoSql = "SELECT * FROM tweets";
 
     conDB.query(pedidoSql, (err, result, fields) => {
@@ -23,12 +22,25 @@ function postearHistorial(req, res) {
 
     } else {
         res.send("Hubo un error al recibir los datos")
-        console.log("no se recibieron datos");
+    }
+}
+
+function deleteSearch(req, res){
+    if(req.params){
+        let pedidoSql = `DELETE FROM tweets WHERE id=${req.params.id}`;
+
+        conDB.query(pedidoSql, (error, result) =>{
+            if(error) res.send(error);
+            res.send(result);
+        })
+    }else{
+        res.send('se hizo un delete, else')
     }
 }
 
 
 module.exports = {
     obtenerHistorial: obtenerHistorial,
-    postearHistorial: postearHistorial
+    postearHistorial: postearHistorial,
+    deleteSearch: deleteSearch
 }

@@ -18,8 +18,7 @@ app.get("/", controladorBuscador.pedirRaiz);
 app.get("/buscador", controladorBuscador.pedirBuscador);
 app.get("/historial", controladorHistorial.obtenerHistorial);
 app.post("/historial", controladorHistorial.postearHistorial);
-
-
+app.delete("/delete/:id", controladorHistorial.deleteSearch);
 
 app.listen(port, ()=>{
     console.log("escuchando puerto : " + port);
